@@ -1,0 +1,209 @@
+.general-window {
+    text-align: center;
+    padding: 20px;
+    background: #F8EDEB;
+    height: 1600px;
+}
+
+.back-button {
+    background-color: #2e2e2e;
+    width: 50px;
+    height: 50px;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-weight: 700; /* Bold weight */
+    font-style: normal;
+    box-shadow: 2px 2px 5px #2e2e2e;
+}
+
+.back-button:hover {
+    background-color: #3e3e3e;
+}
+
+.lora-font-title {
+    color: #3e3e3e;
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 1700; /* Bold weight */
+    font-style: normal;
+}
+
+.question-container {
+    color: #2e2e2e;
+    margin-top: 20px;
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 1200; /* Bold weight */
+    font-style: normal;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adds spacing between buttons */
+    margin-top: 15px;
+}
+
+.option-button {
+    background-color: #E8A598;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    min-width: 120px; /* Ensures consistent button size */
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 700; /* Bold weight */
+    font-style: normal;
+    box-shadow: 2px 2px 5px #2e2e2e;
+}
+
+.option-button:hover {
+    background-color: #FFB5A7;
+}
+
+.correct {
+    background-color: #6B8E85 !important; /* Dark pastel green */
+    color: white;
+}
+
+.incorrect {
+    background-color: #d16d6d !important; /* Dark pastel red */
+    color: white;
+}
+
+/* When an answer is selected, all buttons should appear hovered */
+.option-button {
+    background-color: #E8A598;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    min-width: 120px;
+    font-family: "Lora", serif;
+    font-weight: 700;
+}
+
+.option-button:hover,
+.option-button.selected { /* Apply hover effect when an answer is selected */
+    background-color: #FFB5A7;
+}
+
+/* Ensure the correct/incorrect buttons retain their color even when selected */
+.option-button.correct {
+    background-color: #6B8E85 !important;
+    color: white;
+}
+
+.option-button.incorrect {
+    background-color: #d16d6d !important;
+    color: white;
+}
+
+.correct-message {
+    color: #7CAF80; /* Matching rich green */
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.incorrect-message {
+    color: #E57878; /* Matching rich red */
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.elo-rating {
+    color: #3e3e3e;
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    margin-top: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 10px; /* Adds spacing between buttons */
+    margin-top: 15px;
+}
+
+.next-button,
+.explanation-button {
+    display: inline-block; /* Make buttons inline */
+    padding: 12px 30px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Lora", serif;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 5px #2e2e2e;
+}
+
+.next-button {
+    background-color: #E8A598; /* Soft pastel pink */
+}
+
+.next-button:hover {
+    background-color: #D48C80; /* Slightly darker pastel pink */
+}
+
+.explanation-button {
+    background-color: #2B9985; /* Soft pastel green */
+}
+
+.explanation-button:hover {
+    background-color: #1A9972; /* Slightly darker pastel green */
+}
+
+.explanation-text {
+    color: #3e3e3e;
+    font-family: "Lora", serif;
+    font-weight: 500;
+    margin-top: 10px;
+    text-align: left;
+    padding: 10px;
+    background-color: #F8EDEB;
+    border-radius: 5px;
+}
+.start-button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    width: 100%; /* Ensure the container takes full width */
+}
+
+.start-button {
+
+    padding: 12px 30px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Lora", serif;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 5px #2e2e2e;
+}
+
