@@ -23,6 +23,8 @@ function Memory({ onBack, userData, updateUserData }) {
     const [correctAnswers, setCorrectAnswers] = useState(userData?.correctAnswers || 0);
     const [totalQuestions, setTotalQuestions] = useState(userData?.totalQuestions || 0);
     const [quizStarted, setQuizStarted] = useState(false); // Track if the quiz has started
+    const [hearts, setHearts] = useState(3); // Hearts system (3 lives)
+    const [score, setScore] = useState(0); // Score system
 
     // Filter questions within 100 Elo range
     const filteredQuestions = memoryQuestions.filter(
@@ -156,6 +158,13 @@ function Memory({ onBack, userData, updateUserData }) {
         setTotalQuestions(newData.totalQuestions);
         updateUserData(newData);
 
+        // Update score if correct
+        if (isFullyCorrect) {
+            setScore((prevScore) => prevScore + 10); // Increase score by 10 for each fully correct answer
+        } else {
+            setHearts((prevHearts) => prevHearts - 1); // Decrease hearts if not fully correct
+        }
+
         // Set feedback state
         setCorrectCount(correctCount);
         setTotalCorrectAnswers(totalCorrectAnswers);
@@ -168,10 +177,19 @@ function Memory({ onBack, userData, updateUserData }) {
     const handleStartQuiz = () => {
         setQuizStarted(true); // Mark the quiz as started
         setCurrentQuestionIndex(0); // Start with the first question
+        setHearts(3); // Reset hearts
+        setScore(0); // Reset score
     };
 
     // Move to the next question
     const handleNextQuestion = () => {
+        // Check if the user has lost all hearts
+        if (hearts === 0) {
+            alert(`Game Over! Your final score: ${score}`);
+            setQuizStarted(false); // Return to the start page
+            return;
+        }
+
         setUserAnswers([]); // Reset user answers
         setShowFeedback(false);
         setIsCorrect(false);
@@ -205,12 +223,16 @@ function Memory({ onBack, userData, updateUserData }) {
             <p className="elo-rating">Question Difficulty: {currentQuestion?.difficulty || "N/A"}</p>
             <p>Streak: {streak}</p>
             <p>Accuracy: {totalQuestions > 0 ? ((correctAnswers / totalQuestions) * 100).toFixed(2) + "%" : "N/A"}</p>
+            <p>Hearts: {"❤️".repeat(hearts)}</p> {/* Display hearts */}
+            <p>Score: {score}</p> {/* Display score */}
 
             {!quizStarted ? (
                 // Show "Start Quiz" button if the quiz hasn't started
-                <button className="start-quiz-button" onClick={handleStartQuiz}>
-                    Start Quiz
-                </button>
+                <div>
+                    <button className="start-quiz-button" onClick={handleStartQuiz}>
+                        Start Quiz
+                    </button>
+                </div>
             ) : currentQuestion ? (
                 // Show the question and answer inputs if the quiz has started
                 <div className="question-container">

@@ -25,6 +25,8 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
     });
     const [incorrectQueue, setIncorrectQueue] = useState([]);
     const [questionsSinceLastIncorrect, setQuestionsSinceLastIncorrect] = useState(0);
+    const [hearts, setHearts] = useState(3); // Hearts system (3 lives)
+    const [score, setScore] = useState(0); // Score system
 
     const K = 32;
 
@@ -72,6 +74,8 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
         setShuffledIndices(shuffled);
         setQuizStarted(true);
         setStartTime(Date.now());
+        setHearts(3); // Reset hearts
+        setScore(0); // Reset score
     };
 
     const handleOptionClick = (option) => {
@@ -96,6 +100,13 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
         setCorrectAnswers(newCorrectAnswers);
         setStreak(newStreak);
         setElo(newElo);
+
+        // Update score if correct
+        if (correct) {
+            setScore((prevScore) => prevScore + 10); // Increase score by 10 for each correct answer
+        } else {
+            setHearts((prevHearts) => prevHearts - 1); // Decrease hearts if incorrect
+        }
 
         // Prepare data to update in Firestore
         const newData = {
@@ -130,6 +141,13 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
     };
 
     const handleNextQuestion = () => {
+        // Check if the user has lost all hearts
+        if (hearts === 0) {
+            alert(`Game Over! Your final score: ${score}`);
+            setQuizStarted(false); // Return to the start page
+            return;
+        }
+
         setSelectedOption(null);
         setShowAnswer(false);
         setShowExplanationModal(false);
@@ -146,7 +164,7 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         } else {
             // Quiz completed
-            alert(`Quiz Completed! Your final Elo rating: ${elo}`);
+            alert(`Quiz Completed! Your final score: ${score}`);
             setCurrentQuestionIndex(0);
             const shuffled = shuffleArray([...Array(filteredQuestions.length).keys()]);
             setShuffledIndices(shuffled);
@@ -203,6 +221,8 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
             <p>Streak: {streak}</p>
             <p>Accuracy: {totalQuestions > 0 ? ((correctAnswers / totalQuestions) * 100).toFixed(2) + "%" : "N/A"}</p>
             <p>Last Response Time: {timeTaken.toFixed(2)}s</p>
+            <p>Hearts: {"❤️".repeat(hearts)}</p> {/* Display hearts */}
+            <p>Score: {score}</p> {/* Display score */}
 
             <div className="question-container">
                 <h3>{currentQuestion.question}</h3>
