@@ -1,8 +1,25 @@
+:root {
+    --background-color: #F8EDEB;
+    --primary-color: #FF9A9E;
+    --primary-hover-color: #F78F94;
+    --secondary-color: #2B9985;
+    --secondary-hover-color: #1A9972;
+    --text-color: #3e3e3e;
+    --correct-color: #6B8E85;
+    --incorrect-color: #d16d6d;
+    --button-shadow: 2px 2px 5px rgba(46, 46, 46, 0.3);
+    --font-lora: "Lora", serif;
+    --font-inter: "Inter", sans-serif;
+}
+
 .general-window {
     text-align: center;
     padding: 20px;
-    background: #F8EDEB;
-    height: 1600px;
+    background: var(--background-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .back-button {
@@ -15,195 +32,209 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     margin-left: 10px;
-    transition: background-color 0.3s ease;
-    font-family: "Inter", serif;
-    font-optical-sizing: auto;
-    font-weight: 700; /* Bold weight */
-    font-style: normal;
-    box-shadow: 2px 2px 5px #2e2e2e;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: var(--font-inter);
+    font-weight: 700;
+    box-shadow: var(--button-shadow);
 }
 
 .back-button:hover {
     background-color: #3e3e3e;
+    transform: translateY(-2px);
 }
 
 .lora-font-title {
-    color: #3e3e3e;
-    font-family: "Lora", serif;
-    font-optical-sizing: auto;
-    font-weight: 1700; /* Bold weight */
-    font-style: normal;
+    color: var(--text-color);
+    font-family: var(--font-lora);
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
 .question-container {
-    color: #2e2e2e;
+    color: var(--text-color);
     margin-top: 20px;
-    font-family: "Lora", serif;
-    font-optical-sizing: auto;
-    font-weight: 1200; /* Bold weight */
-    font-style: normal;
+    font-family: var(--font-lora);
+    font-weight: 600;
+    max-width: 800px;
+    width: 100%;
 }
 
 .options {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px; /* Adds spacing between buttons */
-    margin-top: 15px;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .option-button {
-    background-color: #E8A598;
+    background-color: var(--primary-color);
     border: none;
-    padding: 10px 20px;
+    padding: 15px 25px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
-    transition: background-color 0.3s ease;
-    min-width: 120px; /* Ensures consistent button size */
-    font-family: "Lora", serif;
-    font-optical-sizing: auto;
-    font-weight: 700; /* Bold weight */
-    font-style: normal;
-    box-shadow: 2px 2px 5px #2e2e2e;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 150px;
+    font-family: var(--font-lora);
+    font-weight: 600;
+    box-shadow: var(--button-shadow);
+    color: white;
 }
 
 .option-button:hover {
-    background-color: #FFB5A7;
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
 }
 
-.correct {
-    background-color: #6B8E85 !important; /* Dark pastel green */
-    color: white;
-}
-
-.incorrect {
-    background-color: #d16d6d !important; /* Dark pastel red */
-    color: white;
-}
-
-/* When an answer is selected, all buttons should appear hovered */
-.option-button {
-    background-color: #E8A598;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    min-width: 120px;
-    font-family: "Lora", serif;
-    font-weight: 700;
-}
-
-.option-button:hover,
-.option-button.selected { /* Apply hover effect when an answer is selected */
-    background-color: #FFB5A7;
-}
-
-/* Ensure the correct/incorrect buttons retain their color even when selected */
 .option-button.correct {
-    background-color: #6B8E85 !important;
+    background-color: var(--correct-color) !important;
     color: white;
 }
 
 .option-button.incorrect {
-    background-color: #d16d6d !important;
+    background-color: var(--incorrect-color) !important;
     color: white;
 }
 
 .correct-message {
-    color: #7CAF80; /* Matching rich green */
-    font-weight: bold;
-    margin-top: 10px;
+    color: var(--correct-color);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 1.1rem;
 }
 
 .incorrect-message {
-    color: #E57878; /* Matching rich red */
-    font-weight: bold;
-    margin-top: 10px;
+    color: var(--incorrect-color);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 1.1rem;
 }
 
-
 .elo-rating {
-    color: #3e3e3e;
-    font-family: "Lora", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
+    color: var(--text-color);
+    font-family: var(--font-lora);
+    font-weight: 600;
     margin-top: 10px;
+    font-size: 1.2rem;
 }
 
 .button-container {
     display: flex;
-    justify-content: center; /* Center the buttons horizontally */
-    gap: 10px; /* Adds spacing between buttons */
-    margin-top: 15px;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .next-button,
 .explanation-button {
-    display: inline-block; /* Make buttons inline */
     padding: 12px 30px;
     width: 200px;
     height: 50px;
     border: none;
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    font-family: "Lora", serif;
+    font-family: var(--font-lora);
     font-weight: 700;
-    transition: background-color 0.3s ease;
-    box-shadow: 2px 2px 5px #2e2e2e;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--button-shadow);
 }
 
 .next-button {
-    background-color: #E8A598; /* Soft pastel pink */
+    background-color: var(--primary-color);
 }
 
 .next-button:hover {
-    background-color: #D48C80; /* Slightly darker pastel pink */
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
 }
 
 .explanation-button {
-    background-color: #2B9985; /* Soft pastel green */
+    background-color: var(--secondary-color);
 }
 
 .explanation-button:hover {
-    background-color: #1A9972; /* Slightly darker pastel green */
+    background-color: var(--secondary-hover-color);
+    transform: translateY(-2px);
 }
 
 .explanation-text {
-    color: #3e3e3e;
-    font-family: "Lora", serif;
+    color: var(--text-color);
+    font-family: var(--font-lora);
     font-weight: 500;
     margin-top: 10px;
     text-align: left;
-    padding: 10px;
-    background-color: #F8EDEB;
-    border-radius: 5px;
+    padding: 15px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: var(--button-shadow);
 }
+
 .start-button-container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    width: 100%; /* Ensure the container takes full width */
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .start-button {
-
     padding: 12px 30px;
     width: 200px;
     height: 50px;
     border: none;
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    font-family: "Lora", serif;
+    font-family: var(--font-lora);
     font-weight: 700;
-    transition: background-color 0.3s ease;
-    box-shadow: 2px 2px 5px #2e2e2e;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--button-shadow);
+    background-color: var(--primary-color);
 }
 
+.start-button:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}
+
+.topic-selection {
+    margin-bottom: 30px;
+}
+
+.topic-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.topic-button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: var(--font-lora);
+    font-weight: 600;
+    box-shadow: var(--button-shadow);
+}
+
+.topic-button.selected {
+    background-color: #F79F94;
+}
+.topic-button.selected:hover {
+    background-color: #F99F99;
+}
+
+.topic-button:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}

@@ -17,6 +17,12 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
     const [showExplanationModal, setShowExplanationModal] = useState(false);
     const [shuffledIndices, setShuffledIndices] = useState([]);
     const [quizStarted, setQuizStarted] = useState(false);
+    const [selectedTopics, setSelectedTopics] = useState({
+        Geography: false,
+        Technology: false,
+        Biology: false,
+        History: false,
+    });
 
     const K = 32;
 
@@ -37,14 +43,30 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
         return array;
     };
 
+    const handleTopicToggle = (topic) => {
+        setSelectedTopics((prev) => ({
+            ...prev,
+            [topic]: !prev[topic],
+        }));
+    };
+
     const startQuiz = () => {
-        const filtered = questions.filter((q) => Math.abs(q.difficulty - elo) <= 150);
-        if (filtered.length === 0) {
-            alert("No questions available within your Elo range.");
+        const activeTopics = Object.keys(selectedTopics).filter((topic) => selectedTopics[topic]);
+        if (activeTopics.length === 0) {
+            alert("Please select at least one topic.");
             return;
         }
-        const shuffled = shuffleArray([...Array(filtered.length).keys()]);
-        setFilteredQuestions(filtered);
+
+        const filteredByElo = questions.filter((q) => Math.abs(q.difficulty - elo) <= 150);
+        const filteredByTopics = filteredByElo.filter((q) => activeTopics.includes(q.topic));
+
+        if (filteredByTopics.length === 0) {
+            alert("No questions available within your Elo range and selected topics.");
+            return;
+        }
+
+        const shuffled = shuffleArray([...Array(filteredByTopics.length).keys()]);
+        setFilteredQuestions(filteredByTopics);
         setShuffledIndices(shuffled);
         setQuizStarted(true);
         setStartTime(Date.now());
@@ -124,6 +146,22 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
                 <button className="back-button" onClick={onBack}>←</button>
                 <h2 className="lora-font-title">General Knowledge Quiz</h2>
                 <p className="elo-rating">Elo Rating: {elo}</p>
+
+                <div className="topic-selection">
+                    <h3>Select Topics:</h3>
+                    <div className="topic-buttons">
+                        {Object.keys(selectedTopics).map((topic) => (
+                            <button
+                                key={topic}
+                                className={`topic-button ${selectedTopics[topic] ? "selected" : ""}`}
+                                onClick={() => handleTopicToggle(topic)}
+                            >
+                                {topic.charAt(0).toUpperCase() + topic.slice(1)}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
                 <div className="start-button-container">
                     <button className="start-button" onClick={startQuiz}>Start Quiz</button>
                 </div>
@@ -132,7 +170,7 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
     }
 
     if (filteredQuestions.length === 0) {
-        return <div>No questions available within your Elo range.</div>;
+        return <div>No questions available within your Elo range and selected topics.</div>;
     }
 
     const currentQuestion = filteredQuestions[shuffledIndices[currentQuestionIndex]];

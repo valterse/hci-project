@@ -13,7 +13,7 @@ const questions = [
         answer: "Mars",
         difficulty: 1200,
         explanation: "Mars is called the Red Planet because of its reddish appearance, caused by iron oxide (rust) on its surface.",
-        topic: "Astronomy"
+        topic: "Geography"
     },
     {
         question: "Who wrote 'To Kill a Mockingbird'?",
@@ -21,7 +21,7 @@ const questions = [
         answer: "Harper Lee",
         difficulty: 1300,
         explanation: "Harper Lee wrote 'To Kill a Mockingbird,' a classic novel addressing racial injustice in the American South.",
-        topic: "Literature"
+        topic: "History"
     },
     {
         question: "What is the largest ocean on Earth?",
@@ -37,7 +37,7 @@ const questions = [
         answer: "Oxygen",
         difficulty: 1000,
         explanation: "Oxygen is a chemical element with the symbol 'O' and is essential for respiration and combustion.",
-        topic: "Chemistry"
+        topic: "Biology"
     },
     {
         question: "Who painted the Mona Lisa?",
@@ -45,15 +45,7 @@ const questions = [
         answer: "Leonardo da Vinci",
         difficulty: 1400,
         explanation: "Leonardo da Vinci painted the Mona Lisa, one of the most famous portraits in the world, during the Renaissance.",
-        topic: "Art"
-    },
-    {
-        question: "What is the smallest prime number?",
-        options: ["1", "2", "3", "5"],
-        answer: "2",
-        difficulty: 900,
-        explanation: "The smallest prime number is 2, which is also the only even prime number.",
-        topic: "Mathematics"
+        topic: "History"
     },
     {
         question: "Which country is known as the Land of the Rising Sun?",
@@ -77,7 +69,7 @@ const questions = [
         answer: "Nitrogen",
         difficulty: 1100,
         explanation: "Nitrogen makes up about 78% of the Earth's atmosphere, making it the most abundant gas.",
-        topic: "Chemistry"
+        topic: "Biology"
     },
     {
         question: "Who developed the theory of relativity?",
@@ -85,7 +77,7 @@ const questions = [
         answer: "Albert Einstein",
         difficulty: 1500,
         explanation: "Albert Einstein developed the theory of relativity, which revolutionized our understanding of space, time, and gravity.",
-        topic: "Physics"
+        topic: "History"
     },
     {
         question: "What is the hardest natural substance on Earth?",
@@ -93,7 +85,7 @@ const questions = [
         answer: "Diamond",
         difficulty: 1200,
         explanation: "Diamond is the hardest natural substance due to its strong covalent bonding between carbon atoms.",
-        topic: "Chemistry"
+        topic: "Biology"
     },
     {
         question: "Which animal is known as the 'King of the Jungle'?",
@@ -141,7 +133,7 @@ const questions = [
         answer: "H2O",
         difficulty: 900,
         explanation: "The chemical formula for water is H2O, representing two hydrogen atoms bonded to one oxygen atom.",
-        topic: "Chemistry"
+        topic: "Biology"
     },
     {
         question: "Who is known as the father of computers?",
@@ -157,7 +149,7 @@ const questions = [
         answer: "Mercury",
         difficulty: 1100,
         explanation: "Mercury is the closest planet to the Sun, with an average distance of about 36 million miles.",
-        topic: "Astronomy"
+        topic: "Geography"
     },
     {
         question: "What is the capital of Japan?",
@@ -173,7 +165,7 @@ const questions = [
         answer: "Mandarin Chinese",
         difficulty: 1300,
         explanation: "Mandarin Chinese is the most widely spoken language, with over 1 billion native speakers.",
-        topic: "Language"
+        topic: "History"
     },
     {
         question: "Which country is known for the Great Wall?",
@@ -189,7 +181,7 @@ const questions = [
         answer: "George Orwell",
         difficulty: 1400,
         explanation: "George Orwell wrote '1984,' a dystopian novel exploring themes of totalitarianism and surveillance.",
-        topic: "Literature"
+        topic: "History"
     },
     {
         question: "What is the capital of Brazil?",
@@ -213,7 +205,7 @@ const questions = [
         answer: "Jupiter",
         difficulty: 1200,
         explanation: "Jupiter is the largest planet, with a diameter of about 86,881 miles, more than 11 times that of Earth.",
-        topic: "Astronomy"
+        topic: "Geography"
     },
     {
         question: "Who discovered penicillin?",
@@ -237,7 +229,7 @@ const questions = [
         answer: "Hydrogen",
         difficulty: 1000,
         explanation: "Hydrogen has the atomic number 1, making it the lightest and most abundant element in the universe.",
-        topic: "Chemistry"
+        topic: "Biology"
     },
     {
         question: "What is the longest river in the world?",
@@ -253,7 +245,7 @@ const questions = [
         answer: "Jane Austen",
         difficulty: 1400,
         explanation: "Jane Austen wrote 'Pride and Prejudice,' a classic novel exploring themes of love, class, and societal expectations.",
-        topic: "Literature"
+        topic: "History"
     },
     {
         question: "Which country is known for the Taj Mahal?",
@@ -277,7 +269,7 @@ const questions = [
         answer: "Albert Einstein",
         difficulty: 1500,
         explanation: "Albert Einstein is called the 'Father of Modern Physics' for his groundbreaking work on relativity and quantum theory.",
-        topic: "Physics"
+        topic: "History"
     },
     {
         question: "What is the capital of Argentina?",
@@ -293,7 +285,7 @@ const questions = [
         answer: "Saturn",
         difficulty: 1400,
         explanation: "Saturn has the most moons in the solar system, with over 80 confirmed moons.",
-        topic: "Astronomy"
+        topic: "Geography"
     },
     {
         question: "What is the chemical symbol for gold?",
@@ -301,7 +293,7 @@ const questions = [
         answer: "Au",
         difficulty: 1000,
         explanation: "The chemical symbol for gold is Au, derived from the Latin word 'aurum.'",
-        topic: "Chemistry"
+        topic: "Biology"
     },
     {
         question: "Who wrote 'The Great Gatsby'?",
@@ -309,7 +301,7 @@ const questions = [
         answer: "F. Scott Fitzgerald",
         difficulty: 1400,
         explanation: "F. Scott Fitzgerald wrote 'The Great Gatsby,' a novel exploring themes of wealth, love, and the American Dream.",
-        topic: "Literature"
+        topic: "History"
     },
     {
         question: "What is the capital of Egypt?",
@@ -341,7 +333,7 @@ const questions = [
         answer: "Poseidon",
         difficulty: 1200,
         explanation: "Poseidon is the Greek god of the sea, earthquakes, and horses, often depicted with a trident.",
-        topic: "Mythology"
+        topic: "History"
     },
     {
         question: "What is the capital of Germany?",
@@ -373,187 +365,14 @@ const questions = [
         answer: "Saturn",
         difficulty: 1200,
         explanation: "Saturn is known for its prominent ring system, made up of ice, rock, and dust particles.",
-        topic: "Astronomy"
+        topic: "Geography"
     },
     {
         question: "Who wrote 'War and Peace'?",
         options: ["Leo Tolstoy", "Fyodor Dostoevsky", "Anton Chekhov", "Nikolai Gogol"],
         answer: "Leo Tolstoy",
-        difficulty: 1400
-    },
-    {
-        question: "What is the capital of Spain?",
-        options: ["Barcelona", "Madrid", "Valencia", "Seville"],
-        answer: "Madrid",
-        difficulty: 1200
-    },
-    {
-        question: "Which country is known for the kangaroo?",
-        options: ["South Africa", "Australia", "New Zealand", "Argentina"],
-        answer: "Australia",
-        difficulty: 1200
-    },
-    {
-        question: "What is the capital of China?",
-        options: ["Shanghai", "Beijing", "Hong Kong", "Guangzhou"],
-        answer: "Beijing",
-        difficulty: 1200
-    },
-    {
-        question: "Which planet is known as the 'Morning Star'?",
-        options: ["Venus", "Mercury", "Mars", "Jupiter"],
-        answer: "Venus",
-        difficulty: 1200
-    },
-    {
-        question: "Who is the author of 'The Catcher in the Rye'?",
-        options: ["J.D. Salinger", "F. Scott Fitzgerald", "Ernest Hemingway", "Mark Twain"],
-        answer: "J.D. Salinger",
-        difficulty: 1400
-    },
-    {
-        question: "What is the capital of India?",
-        options: ["Mumbai", "Delhi", "Bangalore", "Kolkata"],
-        answer: "Delhi",
-        difficulty: 1200
-    },
-    {
-        question: "Which country is known for the Colosseum?",
-        options: ["Greece", "Italy", "France", "Spain"],
-        answer: "Italy",
-        difficulty: 1200
-    },
-    {
-        question: "What is the capital of the United States?",
-        options: ["New York", "Los Angeles", "Washington, D.C.", "Chicago"],
-        answer: "Washington, D.C.",
-        difficulty: 1200
-    },
-    {
-        question: "Which country is known for the Great Barrier Reef?",
-        options: ["Australia", "Brazil", "Indonesia", "Philippines"],
-        answer: "Australia",
-        difficulty: 1200
-    },
-    {
-        question: "What is the capital of Mexico?",
-        options: ["Guadalajara", "Monterrey", "Mexico City", "Puebla"],
-        answer: "Mexico City",
-        difficulty: 1200
-    },
-    {
-        question: "Which planet is known as the 'Evening Star'?",
-        options: ["Venus", "Mercury", "Mars", "Jupiter"],
-        answer: "Venus",
-        difficulty: 1200
-    },
-    {
-        question: "Who wrote 'The Odyssey'?",
-        options: ["Homer", "Virgil", "Sophocles", "Aristotle"],
-        answer: "Homer",
-        difficulty: 1400
-    },
-    {
-        question: "What is the capital of Greece?",
-        options: ["Athens", "Thessaloniki", "Patras", "Heraklion"],
-        answer: "Athens",
-        difficulty: 1200
-    },
-    {
-        question: "Which country is known for the Machu Picchu?",
-        options: ["Peru", "Chile", "Bolivia", "Ecuador"],
-        answer: "Peru",
-        difficulty: 1300
-    },
-    {
-        question: "What is the capital of Turkey?",
-        options: ["Istanbul", "Ankara", "Izmir", "Bursa"],
-        answer: "Ankara",
-        difficulty: 1300
-    },
-    {
-        question: "Which country is known for the Niagara Falls?",
-        options: ["Canada", "United States", "Mexico", "Brazil"],
-        answer: "Canada",
-        difficulty: 1200
-    },
-    {
-        question: "What is the capital of South Korea?",
-        options: ["Seoul", "Busan", "Incheon", "Daegu"],
-        answer: "Seoul",
-        difficulty: 1200
-    },
-    {
-        question: "Which country is known for the Angkor Wat?",
-        options: ["Thailand", "Vietnam", "Cambodia", "Laos"],
-        answer: "Cambodia",
-        difficulty: 1300
-    },
-    {
-        question: "What is the capital of Thailand?",
-        options: ["Bangkok", "Chiang Mai", "Phuket", "Pattaya"],
-        answer: "Bangkok",
-        difficulty: 1200
-    },
-    {
-        question: "Which country is known for the Statue of Liberty?",
-        options: ["France", "United States", "United Kingdom", "Canada"],
-        answer: "United States",
-        difficulty: 1200
-    },
-    {
-        question: "What is the capital of Vietnam?",
-        options: ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hai Phong"],
-        answer: "Hanoi",
-        difficulty: 1300
-    },
-    {
-        question: "Which country is known for the Christ the Redeemer statue?",
-        options: ["Argentina", "Brazil", "Chile", "Peru"],
-        answer: "Brazil",
-        difficulty: 1200
-    },
-    {
-        question: "What is the capital of Indonesia?",
-        options: ["Jakarta", "Surabaya", "Bandung", "Medan"],
-        answer: "Jakarta",
-        difficulty: 1300
-    },
-    {
-        question: "Which country is known for the Petra?",
-        options: ["Jordan", "Egypt", "Israel", "Saudi Arabia"],
-        answer: "Jordan",
-        difficulty: 1300
-    },
-    {
-        question: "What is the capital of Malaysia?",
-        options: ["Kuala Lumpur", "George Town", "Johor Bahru", "Ipoh"],
-        answer: "Kuala Lumpur",
-        difficulty: 1300
-    },
-    {
-        question: "Which country is known for the Mount Everest?",
-        options: ["Nepal", "China", "India", "Bhutan"],
-        answer: "Nepal",
-        difficulty: 1300
-    },
-    {
-        question: "What is the capital of the Philippines?",
-        options: ["Manila", "Cebu", "Davao", "Quezon City"],
-        answer: "Manila",
-        difficulty: 1300
-    },
-    {
-        question: "Which country is known for the Iguazu Falls?",
-        options: ["Argentina", "Brazil", "Paraguay", "Uruguay"],
-        answer: "Brazil",
-        difficulty: 1300
-    },
-    {
-        question: "What is the capital of Saudi Arabia?",
-        options: ["Riyadh", "Jeddah", "Mecca", "Medina"],
-        answer: "Riyadh",
-        difficulty: 1300
+        difficulty: 1400,
+        topic: "History"
     },
     {
         question: "What is the powerhouse of the cell?",
@@ -754,7 +573,79 @@ const questions = [
         difficulty: 1300,
         explanation: "The wheel was invented by the ancient Mesopotamians around 3500 BCE, primarily for use in pottery before being adapted for transportation.",
         topic: "History"
-    }
+    },
+    {
+        question: "What is the process by which plants make their own food?",
+        options: ["Respiration", "Photosynthesis", "Transpiration", "Fermentation"],
+        answer: "Photosynthesis",
+        difficulty: 800,
+        explanation: "Photosynthesis is the process by which green plants use sunlight, water, and carbon dioxide to create oxygen and energy in the form of glucose.",
+        topic: "Biology"
+    },
+    {
+        question: "Which molecule carries genetic information in humans?",
+        options: ["RNA", "Protein", "DNA", "Lipid"],
+        answer: "DNA",
+        difficulty: 1200,
+        explanation: "DNA (Deoxyribonucleic Acid) is the molecule that carries the genetic instructions used in the growth, development, functioning, and reproduction of all known living organisms.",
+        topic: "Biology"
+    },
+    {
+        question: "What is the largest organ in the human body?",
+        options: ["Liver", "Brain", "Skin", "Heart"],
+        answer: "Skin",
+        difficulty: 900,
+        explanation: "The skin is the largest organ in the human body, serving as a protective barrier and playing a key role in temperature regulation and sensation.",
+        topic: "Biology"
+    },
+    {
+        question: "Which is the longest river in the world?",
+        options: ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"],
+        answer: "Nile River",
+        difficulty: 1100,
+        explanation: "The Nile River is the longest river in the world, stretching approximately 6,650 kilometers (4,130 miles) through northeastern Africa.",
+        topic: "Geography"
+    },
+    {
+        question: "What is the capital of Australia?",
+        options: ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+        answer: "Canberra",
+        difficulty: 700,
+        explanation: "Canberra is the capital of Australia, chosen as a compromise between Sydney and Melbourne, the two largest cities in the country.",
+        topic: "Geography"
+    },
+    {
+        question: "Which desert is the largest in the world?",
+        options: ["Sahara Desert", "Arabian Desert", "Gobi Desert", "Antarctic Desert"],
+        answer: "Antarctic Desert",
+        difficulty: 1300,
+        explanation: "The Antarctic Desert is the largest desert in the world, covering the entire continent of Antarctica with an area of about 14 million square kilometers.",
+        topic: "Geography"
+    },
+    {
+        question: "Who was the first President of the United States?",
+        options: ["Thomas Jefferson", "John Adams", "George Washington", "Benjamin Franklin"],
+        answer: "George Washington",
+        difficulty: 900,
+        explanation: "George Washington was the first President of the United States, serving from 1789 to 1797 and setting many precedents for the office.",
+        topic: "History"
+    },
+    {
+        question: "In which year did World War I begin?",
+        options: ["1914", "1918", "1939", "1941"],
+        answer: "1914",
+        difficulty: 1000,
+        explanation: "World War I began in 1914 after the assassination of Archduke Franz Ferdinand of Austria-Hungary and lasted until 1918.",
+        topic: "History"
+    },
+    {
+        question: "Which ancient civilization built the pyramids of Giza?",
+        options: ["Romans", "Greeks", "Egyptians", "Mayans"],
+        answer: "Egyptians",
+        difficulty: 800,
+        explanation: "The ancient Egyptians built the pyramids of Giza as tombs for their pharaohs, with the Great Pyramid being one of the Seven Wonders of the Ancient World.",
+        topic: "History"
+    },
 ];
 
 export default questions;

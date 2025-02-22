@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  background: #F8EDEB;
+  background: #F8EDEB; /* Soft pastel background */
 }
 
 /* Lora Font Class */
@@ -37,25 +37,28 @@ button {
   font-size: 16px;
   cursor: pointer;
   border: none;
-  background-color: #FEC89A;
+  background-color: #FF9A9E; /* Pastel orange button */
   color: white;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
 }
 
 button:hover {
-  background-color: #FCD2AF;
+  background-color: #F78F94; /* Slightly darker pastel orange on hover */
+  transform: translateY(-2px); /* Raise the button by 2px */
 }
 
 .content {
   margin-top: 20px;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #FF9A9E; /* Pastel orange border */
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #FFFFFF; /* White background for content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .general-window, .memory-window {
@@ -64,8 +67,34 @@ button:hover {
 
 h2 {
   margin-bottom: 10px;
+  color: #333; /* Dark text for headings */
 }
 
 p {
   font-size: 18px;
+  color: #555; /* Slightly lighter text for paragraphs */
+}
+
+.logout {
+  position: absolute; /* Position the logout container absolutely */
+  top: 20px; /* Distance from the top */
+  left: 20px; /* Distance from the left */
+}
+
+.logout-button {
+  padding: 10px 20px;
+  width: 120px;
+  height: 40px;
+  background-color: #FF6F61; /* Pastel red-orange for logout */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.logout-button:hover {
+  background-color: #E66559; /* Slightly darker pastel red-orange on hover */
+  transform: translateY(-2px); /* Raise the button by 2px */
 }

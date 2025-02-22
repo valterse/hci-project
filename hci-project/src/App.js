@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import GeneralKnowledge from "./GeneralKnowledge/GeneralKnowledge";
 import Login from "./Login/Login";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"; // Import signOut
 import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
@@ -15,7 +14,7 @@ const firebaseConfig = {
     storageBucket: "hci-project-5cb3f.appspot.com",
     messagingSenderId: "331116604954",
     appId: "1:331116604954:web:67daaa75605e47b72beba3",
-    measurementId: "G-3J7EDTDZKE"
+    measurementId: "G-3J7EDTDZKE",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -23,28 +22,10 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 
-
-
 function App() {
     const [activeWindow, setActiveWindow] = useState("home"); // Default to "home"
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
-
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                setUser(user);
-                setUserData(userDoc.data());
-                setActiveWindow("home"); // Ensure activeWindow is set to "home" after login
-            } else {
-                setUser(null);
-                setUserData(null);
-            }
-        });
-        return () => unsubscribe();
-    }, []);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -89,6 +70,17 @@ function App() {
         }
     };
 
+    const handleLogout = async () => {
+        try {
+            await signOut(auth); // Sign out the user
+            setUser(null); // Clear the user state
+            setUserData(null); // Clear the user data state
+            setActiveWindow("home"); // Reset the active window
+        } catch (error) {
+            console.error("Error logging out:", error);
+        }
+    };
+
     if (!user) {
         return <Login onLogin={handleLogin} />; // Show login page if user is not logged in
     }
@@ -100,7 +92,12 @@ function App() {
     // Render the main app page with buttons
     return (
         <div className="App">
-            <h1>Welcome to the App!</h1>
+            <div className="logout">
+                <button className="logout-button" onClick={handleLogout}>
+                    Log Out
+                </button>
+            </div>
+            <h1>AUDIMIND</h1>
             <div className="buttons">
                 <button className="lora-font-bold" onClick={() => setActiveWindow("general")}>
                     General Knowledge
