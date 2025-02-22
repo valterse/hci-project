@@ -23,6 +23,8 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
         Biology: false,
         History: false,
     });
+    const [incorrectQueue, setIncorrectQueue] = useState([]); // Queue for incorrect questions
+    const [questionsSinceLastIncorrect, setQuestionsSinceLastIncorrect] = useState(0);
 
     const K = 32;
 
@@ -105,6 +107,14 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
 
         // Update user data in Firestore
         updateUserData(newData);
+
+        // If the answer is incorrect, add the question to the incorrect queue
+        if (!correct) {
+            setIncorrectQueue((prev) => [...prev, shuffledIndices[currentQuestionIndex]]);
+        }
+
+        // Increment the counter for questions since the last incorrect question
+        setQuestionsSinceLastIncorrect((prev) => prev + 1);
     };
 
     const updateElo = (score, streak, correctAnswers, totalQuestions, timeTaken) => {
@@ -124,16 +134,25 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
         setShowAnswer(false);
         setShowExplanationModal(false);
 
-        if (currentQuestionIndex < shuffledIndices.length - 1) {
+        // Check if it's time to re-ask an incorrect question
+        if (questionsSinceLastIncorrect >= 5 && incorrectQueue.length > 0) {
+            // Re-ask the first question in the incorrect queue
+            const nextQuestionIndex = incorrectQueue[0];
+            setCurrentQuestionIndex(nextQuestionIndex);
+            setIncorrectQueue((prev) => prev.slice(1)); // Remove the re-asked question from the queue
+            setQuestionsSinceLastIncorrect(0); // Reset the counter
+        } else if (currentQuestionIndex < shuffledIndices.length - 1) {
+            // Move to the next question
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         } else {
+            // Quiz completed
             alert(`Quiz Completed! Your final Elo rating: ${elo}`);
             setCurrentQuestionIndex(0);
             const shuffled = shuffleArray([...Array(filteredQuestions.length).keys()]);
             setShuffledIndices(shuffled);
         }
 
-        setStartTime(Date.now());
+        setStartTime(Date.now()); // Reset the timer for the next question
     };
 
     const handleExplanationClick = () => {

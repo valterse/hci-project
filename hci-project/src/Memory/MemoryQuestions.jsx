@@ -1,5 +1,196 @@
-const questions = [
+const memoryQuestions = [
     {
-
+        id: 1,
+        question: "What fruits did Emma buy?",
+        answer: ["apples", "bananas", "oranges"],
+        difficulty: 1000,
+    },
+    {
+        id: 2,
+        question: "What did Jake pack in his backpack?",
+        answer: ["notebook", "pencil", "eraser"],
+        difficulty: 1000,
+    },
+    {
+        id: 3,
+        question: "What did Lily eat for breakfast?",
+        answer: ["toast", "butter", "jam", "milk"],
+        difficulty: 1000,
+    },
+    {
+        id: 4,
+        question: "What toys does Tom’s dog play with?",
+        answer: ["ball", "chew toy", "rope"],
+        difficulty: 1000,
+    },
+    {
+        id: 5,
+        question: "What did Sarah and Ben bring for camping?",
+        answer: ["tent", "flashlight", "sleeping bag", "marshmallows"],
+        difficulty: 1050,
+    },
+    {
+        id: 6,
+        question: "What did the art teacher ask the students to bring?",
+        answer: ["paintbrushes", "watercolor paints", "sketchbooks"],
+        difficulty: 1050,
+    },
+    {
+        id: 7,
+        question: "What ingredients did the chef use?",
+        answer: ["onions", "garlic", "tomatoes", "basil", "olive oil"],
+        difficulty: 1100,
+    },
+    {
+        id: 8,
+        question: "What animals did Alex see at the zoo?",
+        answer: ["lion", "giraffe", "zebra", "parrot"],
+        difficulty: 1100,
+    },
+    {
+        id: 9,
+        question: "What are Mia’s favorite ice cream flavors?",
+        answer: ["chocolate", "vanilla", "strawberry"],
+        difficulty: 1000,
+    },
+    {
+        id: 10,
+        question: "What colors were the markers?",
+        answer: ["red", "blue", "green"],
+        difficulty: 1000,
+    },
+    {
+        id: 11,
+        question: "What types of books are on Tim’s bookshelf?",
+        answer: ["mystery", "science fiction", "history"],
+        difficulty: 1050,
+    },
+    {
+        id: 12,
+        question: "What did Noah play on at the park?",
+        answer: ["swings", "slide", "monkey bars"],
+        difficulty: 1000,
+    },
+    {
+        id: 13,
+        question: "What materials were needed for the science experiment?",
+        answer: ["vinegar", "baking soda", "food coloring", "plastic bottle"],
+        difficulty: 1100,
+    },
+    {
+        id: 14,
+        question: "What did the farmer plant in his fields?",
+        answer: ["corn", "wheat", "carrots", "potatoes", "sunflowers"],
+        difficulty: 1150,
+    },
+    {
+        id: 15,
+        question: "What cities did the family visit on their road trip?",
+        answer: ["New York", "Chicago", "Denver", "Los Angeles"],
+        difficulty: 1200,
+    },
+    {
+        id: 16,
+        question: "What did the magician use during the performance?",
+        answer: ["deck of cards", "wand", "hat", "rabbit"],
+        difficulty: 1150,
+    },
+    {
+        id: 17,
+        question: "What colors were the balloons Mark bought?",
+        answer: ["red", "blue", "yellow"],
+        difficulty: 1000,
+    },
+    {
+        id: 18,
+        question: "What does the bakery sell in the morning?",
+        answer: ["croissants", "muffins", "bagels", "donuts"],
+        difficulty: 1050,
+    },
+    {
+        id: 19,
+        question: "What items does Lily keep in her jewelry box?",
+        answer: ["rings", "necklaces", "bracelets"],
+        difficulty: 1050,
+    },
+    {
+        id: 20,
+        question: "What skills did the soccer team practice?",
+        answer: ["dribbling", "passing", "shooting"],
+        difficulty: 1050,
+    },
+    {
+        id: 21,
+        question: "What does Emily’s cat like to play with?",
+        answer: ["yarn", "bell", "rubber mouse", "cardboard box"],
+        difficulty: 1100,
+    },
+    {
+        id: 22,
+        question: "What subjects were on the classroom posters?",
+        answer: ["history", "mathematics", "science", "geography"],
+        difficulty: 1150,
+    },
+    {
+        id: 23,
+        question: "What food and drinks did they bring to the picnic?",
+        answer: ["sandwiches", "chips", "lemonade", "cookies"],
+        difficulty: 1100,
+    },
+    {
+        id: 24,
+        question: "What topics were in the space museum exhibits?",
+        answer: ["moon", "Mars", "black holes", "astronauts"],
+        difficulty: 1200,
+    },
+    {
+        id: 25,
+        question: "Which composers’ pieces did the orchestra play?",
+        answer: ["Beethoven", "Mozart", "Bach", "Tchaikovsky"],
+        difficulty: 1250,
+    },
+    {
+        id: 26,
+        question: "What equipment did the scientist use?",
+        answer: ["microscope", "petri dishes", "test tubes", "Bunsen burner"],
+        difficulty: 1250,
+    },
+    {
+        id: 27,
+        question: "What happened during the parade?",
+        answer: ["waved flags", "threw confetti", "played drums", "rode on floats"],
+        difficulty: 1300,
+    },
+    {
+        id: 28,
+        question: "What civilizations did they study in history class?",
+        answer: ["Egyptians", "Romans", "Greeks", "Mayans"],
+        difficulty: 1300,
+    },
+    {
+        id: 29,
+        question: "What did the traveler carry?",
+        answer: ["passport", "suitcase", "map", "camera"],
+        difficulty: 1100,
+    },
+    {
+        id: 30,
+        question: "What vegetables can you buy at the market?",
+        answer: ["tomatoes", "cucumbers", "peppers", "onions"],
+        difficulty: 1100,
+    },
+    {
+        id: 31,
+        question: "What was inside the pirate’s treasure chest?",
+        answer: ["gold coins", "silver necklaces", "emerald rings", "pearls"],
+        difficulty: 1250,
+    },
+    {
+        id: 32,
+        question: "What ingredients were needed for the wizard’s spell?",
+        answer: ["dragon scales", "crystal", "feather", "drop of moonlight"],
+        difficulty: 1300,
     }
-]
+];
+
+export default memoryQuestions;

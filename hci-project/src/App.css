@@ -45,6 +45,7 @@ button {
   align-items: center;
   text-align: center;
   transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  box-shadow: 2px 2px 5px rgba(46, 46, 46, 0.3);
 }
 
 button:hover {
@@ -97,4 +98,12 @@ p {
 .logout-button:hover {
   background-color: #E66559; /* Slightly darker pastel red-orange on hover */
   transform: translateY(-2px); /* Raise the button by 2px */
+}
+
+.logo {
+  width: 400px; /* Adjust the size as needed */
+  margin-top: -150px;
+  margin-left: -20px;
+  margin-bottom: 20px;
+  height: auto; /* Maintain aspect ratio */
 }

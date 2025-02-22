@@ -1,0 +1,119 @@
+.memory-window {
+    text-align: center;
+    padding: 20px;
+    height: 100vh; /* Make the app take the full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    background: #F8EDEB; /* Soft pastel background */
+}
+
+.question-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px; /* Limit width for better readability */
+}
+
+.audio-controls {
+    margin-bottom: 20px; /* Space between Play Audio button and question */
+    display: flex;
+    justify-content: center; /* Center Play Audio button horizontally */
+}
+
+.answer-input {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center input and buttons horizontally */
+}
+
+.answer-input input {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px; /* Limit input width */
+    margin-bottom: 10px; /* Space between input and Submit button */
+    border-radius: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Space between buttons */
+}
+
+.submit-button, .next-button {
+    padding: 10px 20px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #d16d6dd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.submit-button:disabled, .next-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.feedback {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    gap: 10px; /* Space between feedback message and Next Question button */
+}
+
+.correct-message {
+    color: green;
+}
+
+.incorrect-message {
+    color: red;
+}
+
+.play-button {
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #e16d6d;
+    color: white;
+    border: none;
+}
+
+.play-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Pulsating animation */
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Apply pulsating animation when audio is playing */
+.play-button.playing {
+    animation: pulsate 1s infinite;
+}
+
+.memory-logo {
+    width: 100px; /* Adjust the size as needed */
+    margin-top: 10px;
+    margin-right: 20px;
+    height: auto; /* Maintain aspect ratio */
+}

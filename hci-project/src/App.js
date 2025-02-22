@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import GeneralKnowledge from "./GeneralKnowledge/GeneralKnowledge";
+import Memory from "./Memory/Memory";
 import Login from "./Login/Login";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"; // Import signOut
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -23,29 +24,27 @@ const auth = getAuth();
 const db = getFirestore();
 
 function App() {
-    const [activeWindow, setActiveWindow] = useState("home"); // Default to "home"
+    const [activeWindow, setActiveWindow] = useState("home");
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const userDocRef = doc(db, "users", user.uid); // Reference to the user's document
-                const userDoc = await getDoc(userDocRef); // Check if the document exists
+                const userDocRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userDocRef);
 
                 if (userDoc.exists()) {
-                    // If the document exists, set the user data
                     setUserData(userDoc.data());
                 } else {
-                    // If the document doesn't exist, create it with default values
                     const defaultUserData = {
                         elo: 1200,
                         streak: 0,
                         correctAnswers: 0,
                         totalQuestions: 0,
                     };
-                    await setDoc(userDocRef, defaultUserData); // Create the document
-                    setUserData(defaultUserData); // Set the default data in state
+                    await setDoc(userDocRef, defaultUserData);
+                    setUserData(defaultUserData);
                 }
 
                 setUser(user);
@@ -60,7 +59,7 @@ function App() {
     }, []);
 
     const handleLogin = (userId) => {
-        setActiveWindow("home"); // Explicitly set activeWindow to "home" after login
+        setActiveWindow("home");
     };
 
     const updateUserData = async (newData) => {
@@ -72,24 +71,26 @@ function App() {
 
     const handleLogout = async () => {
         try {
-            await signOut(auth); // Sign out the user
-            setUser(null); // Clear the user state
-            setUserData(null); // Clear the user data state
-            setActiveWindow("home"); // Reset the active window
+            await signOut(auth);
+            setUser(null);
+            setUserData(null);
+            setActiveWindow("home");
         } catch (error) {
             console.error("Error logging out:", error);
         }
     };
 
     if (!user) {
-        return <Login onLogin={handleLogin} />; // Show login page if user is not logged in
+        return <Login onLogin={handleLogin} />;
     }
 
     if (activeWindow === "general") {
         return <GeneralKnowledge onBack={() => setActiveWindow("home")} userData={userData} updateUserData={updateUserData} />;
     }
+    if (activeWindow === "memory") {
+        return <Memory onBack={() => setActiveWindow("home")} userData={userData} updateUserData={updateUserData} />;
+    }
 
-    // Render the main app page with buttons
     return (
         <div className="App">
             <div className="logout">
@@ -97,7 +98,7 @@ function App() {
                     Log Out
                 </button>
             </div>
-            <h1>AUDIMIND</h1>
+            <img src="/coolerlogo3.png" alt="AUDIMIND Logo" className="logo" />
             <div className="buttons">
                 <button className="lora-font-bold" onClick={() => setActiveWindow("general")}>
                     General Knowledge
