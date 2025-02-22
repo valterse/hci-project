@@ -199,6 +199,7 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
             <button className="back-button" onClick={onBack}>←</button>
             <h2 className="lora-font-title">General Knowledge Quiz</h2>
             <p className="elo-rating">Elo Rating: {elo}</p>
+            <p className="elo-rating">Question Difficulty: {currentQuestion.difficulty}</p>
             <p>Streak: {streak}</p>
             <p>Accuracy: {totalQuestions > 0 ? ((correctAnswers / totalQuestions) * 100).toFixed(2) + "%" : "N/A"}</p>
             <p>Last Response Time: {timeTaken.toFixed(2)}s</p>

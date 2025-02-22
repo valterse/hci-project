@@ -4,13 +4,13 @@ import memoryQuestions from "./MemoryQuestions"; // Ensure this path is correct
 
 // Get audio files
 const audioFiles = {};
-for (let i = 1; i <= 32; i++) {
+for (let i = 1; i <= 52; i++) {
     audioFiles[i] = require(`../AudioFiles/${i}.mp3`);
 }
 
 function Memory({ onBack, userData, updateUserData }) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [userAnswer, setUserAnswer] = useState("");
+    const [userAnswers, setUserAnswers] = useState([]); // Store user answers in an array
     const [showFeedback, setShowFeedback] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const [audio, setAudio] = useState(null);
@@ -22,6 +22,7 @@ function Memory({ onBack, userData, updateUserData }) {
     const [streak, setStreak] = useState(userData?.streak || 0);
     const [correctAnswers, setCorrectAnswers] = useState(userData?.correctAnswers || 0);
     const [totalQuestions, setTotalQuestions] = useState(userData?.totalQuestions || 0);
+    const [quizStarted, setQuizStarted] = useState(false); // Track if the quiz has started
 
     // Filter questions within 100 Elo range
     const filteredQuestions = memoryQuestions.filter(
@@ -48,7 +49,7 @@ function Memory({ onBack, userData, updateUserData }) {
 
     // Load the audio when the question changes
     useEffect(() => {
-        if (currentQuestion) {
+        if (currentQuestion && quizStarted) { // Only load audio if the quiz has started
             const newAudio = new Audio(audioFiles[currentQuestion.id]);
             setAudio(newAudio);
 
@@ -64,7 +65,7 @@ function Memory({ onBack, userData, updateUserData }) {
                 newAudio.removeEventListener("ended", () => {}); // Clean up event listener
             };
         }
-    }, [currentQuestion]);
+    }, [currentQuestion, quizStarted]);
 
     // Play the audio when the user clicks the "Play" button
     const handlePlayAudio = () => {
@@ -79,30 +80,26 @@ function Memory({ onBack, userData, updateUserData }) {
         }
     };
 
-    // Handle user input
-    const handleInputChange = (e) => {
-        setUserAnswer(e.target.value);
+    // Handle user input for each answer field
+    const handleInputChange = (index, value) => {
+        const newUserAnswers = [...userAnswers];
+        newUserAnswers[index] = value.toLowerCase(); // Convert to lowercase (allow spaces)
+        setUserAnswers(newUserAnswers);
     };
 
     // Update Elo based on performance
-    const updateElo = (correctCount, totalCorrectAnswers, questionDifficulty) => {
-        const K = 32; // Elo rating constant
-        const proportionCorrect = correctCount / totalCorrectAnswers;
+    const updateElo = (userElo, questionDifficulty, proportionCorrect) => {
+        const K = 32; // Elo rating constant (can be adjusted)
 
-        // Calculate performance factor
-        const performanceFactor = proportionCorrect - 0.5; // Baseline is 50% correct
+        // Calculate the expected score for the user
+        const expectedScore = 1 / (1 + Math.pow(10, (questionDifficulty - userElo) / 400));
 
-        // Calculate difficulty factor
-        const difficultyFactor = questionDifficulty / 1000; // Normalize difficulty
+        // The actual score is the proportion of correct answers
+        const actualScore = proportionCorrect;
 
-        // Calculate Elo scaling factor
-        const eloScalingFactor = 1 / (1 + elo / 2000); // Reduce Elo gain for high Elo users
+        // Calculate the new Elo rating
+        const newElo = userElo + K * (actualScore - expectedScore);
 
-        // Calculate Elo change
-        const eloChange = K * performanceFactor * difficultyFactor * eloScalingFactor;
-
-        // Update Elo
-        const newElo = elo + eloChange;
         return Math.round(newElo); // Round to the nearest integer
     };
 
@@ -110,19 +107,17 @@ function Memory({ onBack, userData, updateUserData }) {
     const checkAnswer = () => {
         if (!currentQuestion) return; // Guard clause if no question is loaded
 
-        // Normalize the user's answer
-        const normalizedUserAnswer = userAnswer
-            .toLowerCase() // Convert to lowercase
-            .replace(/,/g, " ") // Replace commas with spaces
-            .split(/\s+/) // Split into an array of words
-            .filter((word) => word.length > 0); // Remove empty strings
-
         // Normalize the correct answers
         const normalizedCorrectAnswers = currentQuestion.answer
-            .map((answer) => answer.toLowerCase()); // Convert to lowercase
+            .map((answer) => answer.toLowerCase()); // Convert to lowercase (allow spaces)
+
+        // Normalize the user's answers
+        const normalizedUserAnswers = userAnswers
+            .map((answer) => answer.toLowerCase()) // Convert to lowercase (allow spaces)
+            .filter((answer) => answer.length > 0); // Remove empty strings
 
         // Convert both arrays to sets for comparison
-        const userAnswerSet = new Set(normalizedUserAnswer);
+        const userAnswerSet = new Set(normalizedUserAnswers);
         const correctAnswerSet = new Set(normalizedCorrectAnswers);
 
         // Calculate the number of correct answers provided by the user
@@ -140,8 +135,8 @@ function Memory({ onBack, userData, updateUserData }) {
         // Determine if the answer is fully correct
         const isFullyCorrect = correctCount === totalCorrectAnswers;
 
-        // Update Elo
-        const newElo = updateElo(correctCount, totalCorrectAnswers, currentQuestion.difficulty);
+        // Update Elo using the proportion of correct answers
+        const newElo = updateElo(elo, currentQuestion.difficulty, proportionCorrect);
 
         // Update streak
         const newStreak = isFullyCorrect ? streak + 1 : 0;
@@ -169,18 +164,25 @@ function Memory({ onBack, userData, updateUserData }) {
         setShowFeedback(true);
     };
 
+    // Start the quiz
+    const handleStartQuiz = () => {
+        setQuizStarted(true); // Mark the quiz as started
+        setCurrentQuestionIndex(0); // Start with the first question
+    };
+
     // Move to the next question
     const handleNextQuestion = () => {
-        setUserAnswer("");
+        setUserAnswers([]); // Reset user answers
         setShowFeedback(false);
         setIsCorrect(false);
         setIsAudioPlaying(false);
 
         if (currentQuestionIndex < filteredQuestions.length - 1) {
-            setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+            setCurrentQuestionIndex((prevIndex) => prevIndex + 1); // Load the next question
         } else {
             alert("Quiz completed!");
-            setCurrentQuestionIndex(0);
+            setCurrentQuestionIndex(0); // Reset to the first question
+            setQuizStarted(false); // Mark the quiz as ended
         }
     };
 
@@ -200,10 +202,17 @@ function Memory({ onBack, userData, updateUserData }) {
             <button className="back-button" onClick={onBack}>←</button>
             <h2 className="lora-font-title">Memory Quiz</h2>
             <p className="elo-rating">Elo Rating: {elo}</p>
+            <p className="elo-rating">Question Difficulty: {currentQuestion?.difficulty || "N/A"}</p>
             <p>Streak: {streak}</p>
             <p>Accuracy: {totalQuestions > 0 ? ((correctAnswers / totalQuestions) * 100).toFixed(2) + "%" : "N/A"}</p>
 
-            {currentQuestion ? (
+            {!quizStarted ? (
+                // Show "Start Quiz" button if the quiz hasn't started
+                <button className="start-quiz-button" onClick={handleStartQuiz}>
+                    Start Quiz
+                </button>
+            ) : currentQuestion ? (
+                // Show the question and answer inputs if the quiz has started
                 <div className="question-container">
                     {/* Play Audio Button */}
                     <div className="audio-controls">
@@ -219,22 +228,27 @@ function Memory({ onBack, userData, updateUserData }) {
                     {/* Question */}
                     <h3>{currentQuestion.question}</h3>
 
-                    {/* Answer Input and Submit Button */}
+                    {/* Answer Input Fields */}
                     <div className="answer-input">
-                        <input
-                            type="text"
-                            value={userAnswer}
-                            onChange={handleInputChange}
-                            placeholder="Type your answer here..."
-                            disabled={showFeedback}
-                        />
-                        <div className="button-container">
-                            {!showFeedback && (
-                                <button className="submit-button" onClick={checkAnswer}>
-                                    Submit
-                                </button>
-                            )}
-                        </div>
+                        {currentQuestion.answer.map((_, index) => (
+                            <input
+                                key={index}
+                                type="text"
+                                value={userAnswers[index] || ""}
+                                onChange={(e) => handleInputChange(index, e.target.value)}
+                                placeholder={`Answer ${index + 1}`}
+                                disabled={showFeedback}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="button-container">
+                        {!showFeedback && (
+                            <button className="submit-button" onClick={checkAnswer}>
+                                Submit
+                            </button>
+                        )}
                     </div>
 
                     {/* Feedback */}
