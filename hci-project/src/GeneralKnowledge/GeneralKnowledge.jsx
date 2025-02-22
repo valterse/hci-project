@@ -7,7 +7,7 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
     const [showAnswer, setShowAnswer] = useState(false);
-    const [elo, setElo] = useState(userData?.elo || 1200);
+    const [elo, setElo] = useState(userData?.elo || 1200); // Use General Knowledge Elo
     const [streak, setStreak] = useState(userData?.streak || 0);
     const [correctAnswers, setCorrectAnswers] = useState(userData?.correctAnswers || 0);
     const [totalQuestions, setTotalQuestions] = useState(userData?.totalQuestions || 0);
@@ -23,7 +23,7 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
         Biology: false,
         History: false,
     });
-    const [incorrectQueue, setIncorrectQueue] = useState([]); // Queue for incorrect questions
+    const [incorrectQueue, setIncorrectQueue] = useState([]);
     const [questionsSinceLastIncorrect, setQuestionsSinceLastIncorrect] = useState(0);
 
     const K = 32;
@@ -99,7 +99,7 @@ function GeneralKnowledge({ onBack, userData, updateUserData }) {
 
         // Prepare data to update in Firestore
         const newData = {
-            elo: newElo,
+            elo: newElo, // Update General Knowledge Elo
             streak: newStreak,
             correctAnswers: newCorrectAnswers,
             totalQuestions: newTotalQuestions,

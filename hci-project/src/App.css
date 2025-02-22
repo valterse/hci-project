@@ -1,3 +1,9 @@
+/* Disable scrolling */
+body, html {
+  overflow: hidden;
+  height: 100%;
+}
+
 .App {
   text-align: center;
   padding: 20px;
@@ -7,6 +13,7 @@
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
   background: #F8EDEB; /* Soft pastel background */
+  box-sizing: border-box; /* Ensure padding is included in height/width */
 }
 
 /* Lora Font Class */
@@ -27,12 +34,15 @@
 
 .buttons {
   display: flex;
-  gap: 20px; /* Space between buttons */
+  gap: 10px; /* Reduced space between buttons for mobile */
+  flex-direction: column; /* Stack buttons vertically for mobile */
+  align-items: center; /* Center buttons horizontally */
 }
 
 button {
-  width: 150px; /* Fixed width for buttons */
-  height: 150px; /* Fixed height for buttons */
+  width: 80vw; /* Use viewport width for responsive sizing */
+  max-width: 300px; /* Limit maximum width */
+  height: 80px; /* Fixed height for buttons */
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -101,9 +111,9 @@ p {
 }
 
 .logo {
-  width: 400px; /* Adjust the size as needed */
-  margin-top: -150px;
-  margin-left: -20px;
+  width: 80vw; /* Use viewport width for responsive sizing */
+  max-width: 300px; /* Limit maximum width */
+  margin-top: -50px; /* Adjusted margin for mobile */
   margin-bottom: 20px;
   height: auto; /* Maintain aspect ratio */
 }

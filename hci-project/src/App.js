@@ -38,7 +38,8 @@ function App() {
                     setUserData(userDoc.data());
                 } else {
                     const defaultUserData = {
-                        elo: 1200,
+                        elo: 1200, // General Knowledge Elo
+                        memoryElo: 1200, // Memory Quiz Elo
                         streak: 0,
                         correctAnswers: 0,
                         totalQuestions: 0,
@@ -64,8 +65,15 @@ function App() {
 
     const updateUserData = async (newData) => {
         if (user) {
-            await updateDoc(doc(db, "users", user.uid), newData);
-            setUserData(newData);
+            const userDocRef = doc(db, "users", user.uid);
+            const userDoc = await getDoc(userDocRef);
+
+            if (userDoc.exists()) {
+                // Merge new data with existing data to avoid overwriting the other Elo
+                const updatedData = { ...userDoc.data(), ...newData };
+                await updateDoc(userDocRef, updatedData);
+                setUserData(updatedData);
+            }
         }
     };
 
@@ -99,6 +107,10 @@ function App() {
                 </button>
             </div>
             <img src="/coolerlogo3.png" alt="AUDIMIND Logo" className="logo" />
+            <div className="elo-ratings">
+                <p>General Knowledge Elo: {userData?.elo || 1200}</p>
+                <p>Memory Quiz Elo: {userData?.memoryElo || 1200}</p>
+            </div>
             <div className="buttons">
                 <button className="lora-font-bold" onClick={() => setActiveWindow("general")}>
                     General Knowledge

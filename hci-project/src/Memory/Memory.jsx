@@ -18,20 +18,33 @@ function Memory({ onBack, userData, updateUserData }) {
     const [correctCount, setCorrectCount] = useState(0);
     const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
     const [pointsEarned, setPointsEarned] = useState(0);
-    const [elo, setElo] = useState(userData?.elo || 1200); // Initialize Elo from userData
-    const [streak, setStreak] = useState(userData?.streak || 0); // Initialize streak from userData
-    const [correctAnswers, setCorrectAnswers] = useState(userData?.correctAnswers || 0); // Initialize correctAnswers from userData
-    const [totalQuestions, setTotalQuestions] = useState(userData?.totalQuestions || 0); // Initialize totalQuestions from userData
+    const [elo, setElo] = useState(userData?.memoryElo || 1200); // Use Memory Quiz Elo
+    const [streak, setStreak] = useState(userData?.streak || 0);
+    const [correctAnswers, setCorrectAnswers] = useState(userData?.correctAnswers || 0);
+    const [totalQuestions, setTotalQuestions] = useState(userData?.totalQuestions || 0);
+
+    // Filter questions within 100 Elo range
+    const filteredQuestions = memoryQuestions.filter(
+        (question) => Math.abs(question.difficulty - elo) <= 100
+    );
+
+    // Disable scrolling
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
 
     // Get the current question
-    const currentQuestion = memoryQuestions[currentQuestionIndex];
+    const currentQuestion = filteredQuestions[currentQuestionIndex];
 
     // Debugging: Log the current question and index
     useEffect(() => {
         console.log("Current Question Index:", currentQuestionIndex);
         console.log("Current Question:", currentQuestion);
-        console.log("Memory Questions:", memoryQuestions);
-    }, [currentQuestionIndex, currentQuestion]);
+        console.log("Filtered Questions:", filteredQuestions);
+    }, [currentQuestionIndex, currentQuestion, filteredQuestions]);
 
     // Load the audio when the question changes
     useEffect(() => {
@@ -76,23 +89,17 @@ function Memory({ onBack, userData, updateUserData }) {
         const K = 32; // Elo rating constant
         const proportionCorrect = correctCount / totalCorrectAnswers;
 
-        // Determine if the user performed better than expected
-        const expectedScore = 0.5; // Baseline for "more than half correct"
-        const actualScore = proportionCorrect;
+        // Calculate performance factor
+        const performanceFactor = proportionCorrect - 0.5; // Baseline is 50% correct
 
-        // Adjust Elo based on performance
-        let eloChange = 0;
-        if (actualScore > expectedScore) {
-            // Gain Elo if more than half correct
-            eloChange = K * (1 - expectedScore); // Reward for good performance
-        } else if (actualScore < expectedScore) {
-            // Lose Elo if less than half correct
-            eloChange = K * (0 - expectedScore); // Penalty for poor performance
-        }
-
-        // Factor in question difficulty
+        // Calculate difficulty factor
         const difficultyFactor = questionDifficulty / 1000; // Normalize difficulty
-        eloChange *= difficultyFactor;
+
+        // Calculate Elo scaling factor
+        const eloScalingFactor = 1 / (1 + elo / 2000); // Reduce Elo gain for high Elo users
+
+        // Calculate Elo change
+        const eloChange = K * performanceFactor * difficultyFactor * eloScalingFactor;
 
         // Update Elo
         const newElo = elo + eloChange;
@@ -141,7 +148,7 @@ function Memory({ onBack, userData, updateUserData }) {
 
         // Update user data
         const newData = {
-            elo: newElo,
+            memoryElo: newElo, // Update Memory Quiz Elo
             streak: newStreak,
             correctAnswers: correctAnswers + (isFullyCorrect ? 1 : 0),
             totalQuestions: totalQuestions + 1,
@@ -169,13 +176,24 @@ function Memory({ onBack, userData, updateUserData }) {
         setIsCorrect(false);
         setIsAudioPlaying(false);
 
-        if (currentQuestionIndex < memoryQuestions.length - 1) {
+        if (currentQuestionIndex < filteredQuestions.length - 1) {
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         } else {
             alert("Quiz completed!");
             setCurrentQuestionIndex(0);
         }
     };
+
+    // If no questions are within the 100 Elo range, show a message
+    if (filteredQuestions.length === 0) {
+        return (
+            <div className="memory-window">
+                <button className="back-button" onClick={onBack}>←</button>
+                <h2 className="lora-font-title">Memory Quiz</h2>
+                <p>No questions available within your Elo range. Please try again later.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="memory-window">
